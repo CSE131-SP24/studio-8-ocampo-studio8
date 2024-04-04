@@ -2,20 +2,29 @@ package studio8;
 
 public class SelectAllQuestion extends MultipleChoiceQuestion {
 
-	public SelectAllQuestion(String prompt, String answer, String[] choices) {
+	public SelectAllQuestion(String prompt, String answer, String[] choices) { //students should make constructor
 		//Hint: 1 point per choice
 		//FIXME
+		
+		super(prompt, answer, choices.length, choices);
+
 	}
 	
-	public int checkAnswer(String givenAnswer) {
+	public int checkAnswer(String givenAnswer) { //students are supposed to do this one
 		//FIXME Should return partial credit (if earned)!
-		return 0;
+		
+		int incorrectValues = 0;
+		incorrectValues = findMissingCorrectAnswers(givenAnswer);
+		incorrectValues += findIncorrectGivenAnswers(givenAnswer);
+		return this.getPoints() - incorrectValues;
+		//return 0;
 	}
 
 	private int findMissingCorrectAnswers(String givenAnswer) {
+		int incorrectValues = 0;
 		String answer = this.getAnswer();
 		//how many letters are in the correct answer but not the given answer?
-		int incorrectValues = findMissingCharacters(givenAnswer, answer);
+		incorrectValues = findMissingCharacters(givenAnswer, answer);
 		return incorrectValues;
 	}
 	
